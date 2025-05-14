@@ -11,6 +11,22 @@ export const getAllInfo = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const createNewInfo = async (req, res) => {
+  try {
+    const newInfo = await RandomInfo.create(req.body);
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        info: newInfo,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: error.message });
   }
 };

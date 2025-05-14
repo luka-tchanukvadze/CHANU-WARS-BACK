@@ -1,31 +1,14 @@
 import express from "express";
 import { RandomInfo } from "../models/RandomInfoModel.js";
-import { getAllInfo } from "../controllers/randomInfoController.js";
+import {
+  getAllInfo,
+  createNewInfo,
+} from "../controllers/randomInfoController.js";
 
 const router = express.Router();
 
 // Route for Save a new RandomInfo
-router.post("/", async (request, response) => {
-  try {
-    if (!request.body.title || !request.body.info) {
-      return response.status(400).send({
-        message: "send all required fields: title, info",
-      });
-    }
-
-    const newInfo = {
-      title: request.body.title,
-      info: request.body.info,
-    };
-
-    const info = await RandomInfo.create(newInfo);
-
-    return response.status(201).send(info);
-  } catch (error) {
-    console.log(error);
-    response.status(500).send({ message: error.message });
-  }
-});
+router.post("/", createNewInfo);
 
 // Route for Get all books from database
 router.get("/", getAllInfo);
