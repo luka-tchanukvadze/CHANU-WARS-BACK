@@ -1,5 +1,6 @@
 import express from "express";
 import { RandomInfo } from "../models/RandomInfoModel.js";
+import { getAllInfo } from "../controllers/randomInfoController.js";
 
 const router = express.Router();
 
@@ -27,16 +28,7 @@ router.post("/", async (request, response) => {
 });
 
 // Route for Get all books from database
-router.get("/", async (request, response) => {
-  try {
-    const infos = await RandomInfo.find({});
-
-    return response.status(200).json({ count: infos.length, data: infos });
-  } catch (error) {
-    console.log(error);
-    response.status(500).send({ message: error.message });
-  }
-});
+router.get("/", getAllInfo);
 
 // // Uncomment and implement other routes as needed
 // // Example for Get info by ID
