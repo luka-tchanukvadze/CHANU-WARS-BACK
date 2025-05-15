@@ -1,32 +1,23 @@
 import { RandomInfo } from "../models/RandomInfoModel.js";
+import { catchAsync } from "../utils/catchAsync.js";
 
-export const getAllInfo = async (req, res) => {
-  try {
-    const infos = await RandomInfo.find({});
+export const getAllInfo = catchAsync(async (req, res) => {
+  const infos = await RandomInfo.find({});
 
-    res.status(200).json({
-      status: "success",
-      result: infos.length,
-      body: infos,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: error.message });
-  }
-};
+  res.status(200).json({
+    status: "success",
+    result: infos.length,
+    body: infos,
+  });
+});
 
-export const createNewInfo = async (req, res) => {
-  try {
-    const newInfo = await RandomInfo.create(req.body);
+export const createNewInfo = catchAsync(async (req, res) => {
+  const newInfo = await RandomInfo.create(req.body);
 
-    res.status(201).json({
-      status: "success",
-      data: {
-        info: newInfo,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: error.message });
-  }
-};
+  res.status(201).json({
+    status: "success",
+    data: {
+      info: newInfo,
+    },
+  });
+});
