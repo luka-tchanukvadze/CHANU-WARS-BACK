@@ -5,6 +5,7 @@ import app from "./app.js";
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! shutting down...");
   console.log(err.name, err.message);
+
   process.exit();
 });
 
