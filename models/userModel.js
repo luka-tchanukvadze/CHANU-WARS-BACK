@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
 
 const userShema = new mongoose.Schema({
   name: {
@@ -29,6 +30,19 @@ const userShema = new mongoose.Schema({
       message: "Passwords are not the same",
     },
   },
+});
+
+userShema.pre("save", async function (next) {
+  // Only run this when password was actually modified
+  if (!this.isModified("password")) return next();
+
+  // Hash the password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+
+  // Delete the password confirm
+  this.passwordConfirm = undefined;
+
+  next();
 });
 
 export const User = mongoose.model("User", userShema);
