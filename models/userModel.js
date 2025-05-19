@@ -22,6 +22,12 @@ const userShema = new mongoose.Schema({
   passwordConfirm: {
     type: String,
     required: [true, "User must have a passwordConfirm"],
+    validate: {
+      validator: function (el) {
+        return el === this.password;
+      },
+      message: "Passwords are not the same",
+    },
   },
 });
 
