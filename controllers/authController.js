@@ -51,3 +51,15 @@ export const login = catchAsync(async (req, res, next) => {
     token,
   });
 });
+
+export const protect = catchAsync(async (req, res, next) => {
+  // 1) Getting token and check if it's there
+
+  // 2) Verification token
+
+  // 3) Check if user still exists
+
+  // 4) Check if user changed password after the token was issued
+
+  next();
+});
