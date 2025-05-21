@@ -3,6 +3,7 @@ import {
   getAllInfo,
   createNewInfo,
 } from "../controllers/randomInfoController.js";
+import { protect } from "../controllers/authController.js";
 
 const router = express.Router();
 
