@@ -94,3 +94,13 @@ export const protect = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+export const restristTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You do not have perission to perform this action", 403)
+      );
+    }
+  };
+};
