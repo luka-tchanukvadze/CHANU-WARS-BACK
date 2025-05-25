@@ -6,6 +6,6 @@ export const globalErrorHandler = (err, req, res, next) => {
     status: err.status,
     message: err.message,
   });
-
+  console.log(err);
   next();
 };

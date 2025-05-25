@@ -1,5 +1,7 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+dotenv.config({ path: "./config.env" });
+
+import mongoose from "mongoose";
 import app from "./app.js";
 
 process.on("uncaughtException", (err) => {
@@ -8,8 +10,6 @@ process.on("uncaughtException", (err) => {
 
   process.exit();
 });
-
-dotenv.config({ path: "./config.env" });
 
 const mongoDBURL = process.env.MONGO_URL;
 
