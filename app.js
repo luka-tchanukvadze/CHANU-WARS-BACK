@@ -6,12 +6,12 @@ import AppError from "./utils/appError.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
 
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 
-// Middlewares
 const app = express();
-
-// middleware for parsing request body
-app.use(express.json());
+// Global Middlewares
+// Set Security HTTP headers
+app.use(helmet());
 
 const limiter = rateLimit({
   limit: 50,
@@ -19,6 +19,9 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again in an hour!",
 });
 app.use(limiter);
+
+// middleware for parsing request body
+app.use(express.json());
 
 // middleware for handling CORS POLICY
 app.use(cors());
