@@ -7,6 +7,8 @@ import { globalErrorHandler } from "./controllers/errorController.js";
 
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
+import xss from "xss-clean";
 
 const app = express();
 // Global Middlewares
@@ -22,6 +24,12 @@ app.use(limiter);
 
 // middleware for parsing request body
 app.use(express.json());
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization agains XSS attacks
+app.use(xss());
 
 // middleware for handling CORS POLICY
 app.use(cors());
