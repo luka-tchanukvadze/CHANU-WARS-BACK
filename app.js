@@ -9,6 +9,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
+import hpp from "hpp";
 
 const app = express();
 // Global Middlewares
@@ -30,6 +31,9 @@ app.use(mongoSanitize());
 
 // Data sanitization agains XSS attacks
 app.use(xss());
+
+// Prevent parameter pollutions
+app.use(hpp());
 
 // middleware for handling CORS POLICY
 app.use(cors());
