@@ -1,6 +1,8 @@
 import express from "express";
 import randomInfoRoute from "./routes/randomInfoRoute.js";
 import userRoutes from "./routes/userRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
+
 import cors from "cors";
 import AppError from "./utils/appError.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
@@ -45,6 +47,7 @@ app.get("/", (request, response) => {
 
 app.use("/randomInfos", randomInfoRoute);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/reviews", reviewRoutes);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
