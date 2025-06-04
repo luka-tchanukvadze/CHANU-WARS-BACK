@@ -7,9 +7,6 @@ import { protect, restristTo } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(getAllReviews)
-  .post(protect, restristTo("user"), createNewReview);
+router.route("/").get(getAllReviews).post(createNewReview);
 
 export default router;
