@@ -8,6 +8,8 @@ import {
 const router = express.Router();
 
 router.route("/").get(getAllInfo).post(createNewInfo);
+
+// This is for personal use
 router.route("/:id").delete(deleteInfo);
 
 export default router;
