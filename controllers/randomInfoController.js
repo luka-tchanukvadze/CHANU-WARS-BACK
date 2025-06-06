@@ -1,5 +1,6 @@
 import { RandomInfo } from "../models/RandomInfoModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
+import { deleteOne } from "./handlerFactory.js";
 
 export const getAllInfo = catchAsync(async (req, res) => {
   const infos = await RandomInfo.find({});
@@ -21,3 +22,5 @@ export const createNewInfo = catchAsync(async (req, res) => {
     },
   });
 });
+
+export const deleteInfo = deleteOne(RandomInfo);
