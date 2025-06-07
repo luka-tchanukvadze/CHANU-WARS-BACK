@@ -15,7 +15,7 @@ export const deleteOne = (Model) =>
     });
   });
 
-export const updateOne = (Model) => {
+export const updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -29,8 +29,7 @@ export const updateOne = (Model) => {
     res.status(200).json({
       status: "success",
       data: {
-        doc,
+        data: doc,
       },
     });
   });
-};
