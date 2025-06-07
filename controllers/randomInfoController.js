@@ -1,6 +1,6 @@
 import { RandomInfo } from "../models/RandomInfoModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
-import { deleteOne, updateOne } from "./handlerFactory.js";
+import { createOne, deleteOne, updateOne } from "./handlerFactory.js";
 
 export const getAllInfo = catchAsync(async (req, res) => {
   const infos = await RandomInfo.find({});
@@ -12,16 +12,6 @@ export const getAllInfo = catchAsync(async (req, res) => {
   });
 });
 
-export const createNewInfo = catchAsync(async (req, res) => {
-  const newInfo = await RandomInfo.create(req.body);
-
-  res.status(201).json({
-    status: "success",
-    data: {
-      info: newInfo,
-    },
-  });
-});
-
+export const createNewInfo = createOne(RandomInfo);
 export const updateInfo = updateOne(RandomInfo);
 export const deleteInfo = deleteOne(RandomInfo);
