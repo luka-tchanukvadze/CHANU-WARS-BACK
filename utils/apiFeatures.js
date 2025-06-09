@@ -30,4 +30,15 @@ class APIFeatures {
 
     return this;
   }
+
+  limitFields() {
+    if (this.queryString.fields) {
+      const fileds = this.queryString.fields.split(",").join(" ");
+      this.query = this.query.select(fileds);
+    } else {
+      this.query = this.query.select("-__v");
+    }
+
+    return this;
+  }
 }
