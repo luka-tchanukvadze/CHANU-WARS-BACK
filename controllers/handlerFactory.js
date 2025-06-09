@@ -46,6 +46,7 @@ export const createOne = (Model) =>
     });
   });
 
+// i am not usying this one for now
 export const getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     let query = Model.findById(req.params.id);
@@ -56,12 +57,12 @@ export const getOne = (Model, popOptions) =>
 
     if (!doc) {
       return next(new AppError("No doc found with that ID", 404));
-
-      res.status(200).json({
-        status: "success",
-        data: {
-          data: doc,
-        },
-      });
     }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        data: doc,
+      },
+    });
   });

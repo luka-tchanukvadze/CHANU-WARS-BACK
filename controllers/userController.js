@@ -23,7 +23,7 @@ export const getUser = (req, res) => {
 export const createUser = (req, res) => {
   res.status(500).json({
     status: "error",
-    message: "This route is not yet definded",
+    message: "This route is not definded. Please use /signup instead",
   });
 };
 
