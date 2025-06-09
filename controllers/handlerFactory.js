@@ -1,5 +1,6 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import AppError from "./../utils/appError.js";
+import APIFeatures from "./../utils/apiFeatures.js";
 
 export const deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -61,6 +62,28 @@ export const getOne = (Model, popOptions) =>
 
     res.status(200).json({
       status: "success",
+      data: {
+        data: doc,
+      },
+    });
+  });
+
+export const getAll = (Model) =>
+  catchAsync(async (req, res, next) => {
+    // Execure query
+    const features = new APIFeatures(Model.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const doc = await features.query;
+
+    // Send reqsponse
+    res.status(200).json({
+      status: "success",
+      requestedAt: req.requestTime,
+      results: doc.length,
       data: {
         data: doc,
       },

@@ -1,16 +1,8 @@
 import { RandomInfo } from "../models/RandomInfoModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
-import { createOne, deleteOne, updateOne } from "./handlerFactory.js";
+import { createOne, deleteOne, getAll, updateOne } from "./handlerFactory.js";
 
-export const getAllInfo = catchAsync(async (req, res) => {
-  const infos = await RandomInfo.find({});
-
-  res.status(200).json({
-    status: "success",
-    result: infos.length,
-    body: infos,
-  });
-});
+export const getAllInfo = getAll(RandomInfo);
 
 export const createNewInfo = createOne(RandomInfo);
 export const updateInfo = updateOne(RandomInfo);
