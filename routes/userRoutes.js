@@ -18,8 +18,8 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 
+// These endpoints are for personal use, not integrated into the frontend
 router.patch("/updateMyPassword", protect, updatePassword);
-
 router.route("/").get(getAllUsers).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 

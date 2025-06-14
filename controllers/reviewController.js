@@ -1,25 +1,11 @@
 import { Review } from "../models/reviewModel.js";
 import { catchAsync } from "../utils/catchAsync.js";
+import { createOne, getAll } from "./handlerFactory.js";
 
-export const getAllReviews = catchAsync(async (req, res, next) => {
-  const reviews = await Review.find();
+/**
+ * @description These controllers use `handlerFactory.js` to keep the code neat and avoid repeating myself.
+ * If you want to see more complex controller code, check out `authController.js`.
+ */
 
-  res.status(200).json({
-    status: "success",
-    results: reviews.length,
-    data: {
-      reviews,
-    },
-  });
-});
-
-export const createNewReview = catchAsync(async (req, res, next) => {
-  const newReview = await Review.create(req.body);
-
-  res.status(201).json({
-    status: "sucess",
-    data: {
-      newReview,
-    },
-  });
-});
+export const getAllReviews = getAll(Review);
+export const createNewReview = createOne(Review);

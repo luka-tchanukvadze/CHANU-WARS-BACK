@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.route("/").get(getAllInfo).post(createNewInfo);
 
-// This is for personal use
+// These endpoints are for personal use, not integrated into the frontend
 router.route("/:id").delete(deleteInfo);
 router.route("/:id").patch(updateInfo);
 

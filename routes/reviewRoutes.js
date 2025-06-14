@@ -3,7 +3,7 @@ import {
   createNewReview,
   getAllReviews,
 } from "../controllers/reviewController.js";
-import { protect, restristTo } from "../controllers/authController.js";
+// import { protect, restristTo } from "../controllers/authController.js";
 
 const router = express.Router();
 

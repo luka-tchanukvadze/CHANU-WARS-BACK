@@ -14,6 +14,7 @@ import xss from "xss-clean";
 import hpp from "hpp";
 
 const app = express();
+
 // Global Middlewares
 // Set Security HTTP headers
 app.use(helmet());

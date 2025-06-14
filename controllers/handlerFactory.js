@@ -47,27 +47,6 @@ export const createOne = (Model) =>
     });
   });
 
-// i am not usying this one for now
-export const getOne = (Model, popOptions) =>
-  catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
-
-    if (popOptions) query = query.populate(popOptions);
-
-    const doc = await query;
-
-    if (!doc) {
-      return next(new AppError("No doc found with that ID", 404));
-    }
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        data: doc,
-      },
-    });
-  });
-
 export const getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // Execure query
@@ -84,6 +63,27 @@ export const getAll = (Model) =>
       status: "success",
       requestedAt: req.requestTime,
       results: doc.length,
+      data: {
+        data: doc,
+      },
+    });
+  });
+
+// i am not usying this one for now
+export const getOne = (Model, popOptions) =>
+  catchAsync(async (req, res, next) => {
+    let query = Model.findById(req.params.id);
+
+    if (popOptions) query = query.populate(popOptions);
+
+    const doc = await query;
+
+    if (!doc) {
+      return next(new AppError("No doc found with that ID", 404));
+    }
+
+    res.status(200).json({
+      status: "success",
       data: {
         data: doc,
       },
