@@ -38,7 +38,7 @@ app.use(mongoSanitize());
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   // console.log(req.headers);
-  console.log(req.cookies);
+  // console.log(req.cookies);
 
   next();
 });
