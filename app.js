@@ -12,6 +12,7 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
 import hpp from "hpp";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -28,9 +29,19 @@ app.use(limiter);
 
 // middleware for parsing request body
 app.use(express.json({ limit: "10kb" }));
+app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+
+// Test middlewareAdd commentMore actions
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  // console.log(req.headers);
+  console.log(req.cookies);
+
+  next();
+});
 
 // Data sanitization agains XSS attacks
 app.use(xss());
