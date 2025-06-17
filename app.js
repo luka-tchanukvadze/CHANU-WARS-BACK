@@ -13,8 +13,11 @@ import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
 import hpp from "hpp";
 import cookieParser from "cookie-parser";
+import compression from "compression";
 
 const app = express();
+
+app.enable("trust proxy");
 
 // Global Middlewares
 // Set Security HTTP headers
@@ -33,6 +36,8 @@ app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+
+app.use(compression());
 
 // Test middlewareAdd commentMore actions
 app.use((req, res, next) => {
