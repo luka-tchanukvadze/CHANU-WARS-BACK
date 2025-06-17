@@ -8,6 +8,7 @@ import {
 } from "../controllers/userController.js";
 import {
   login,
+  logout,
   protect,
   signup,
   updatePassword,
@@ -17,6 +18,7 @@ const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.get("/logout", logout);
 
 // These endpoints are for personal use, not integrated into the frontend
 router.patch("/updateMyPassword", protect, updatePassword);
