@@ -22,6 +22,12 @@ const reviewSchema = new mongoose.Schema(
         required: [true, "Review must belong to a user"],
       },
     ],
+    faction: {
+      type: String,
+      enum: ["jedi", "sith"],
+      required: [true, "Review must have a faction"],
+      default: "jedi",
+    },
   },
   {
     toJSON: { virtuals: true },
