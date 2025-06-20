@@ -55,7 +55,12 @@ app.use(xss());
 app.use(hpp());
 
 // middleware for handling CORS POLICY
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: false,
+  })
+);
 
 app.get("/", (request, response) => {
   console.log(request);
