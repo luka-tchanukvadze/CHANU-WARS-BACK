@@ -17,7 +17,7 @@ import compression from "compression";
 
 const app = express();
 
-app.enable("trust proxy");
+// app.enable("trust proxy");
 
 // Global Middlewares
 // Set Security HTTP headers
