@@ -3,6 +3,7 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
+  getMe,
   getUser,
   updateUser,
 } from "../controllers/userController.js";
@@ -19,6 +20,8 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.get("/logout", logout);
+
+router.get("/me", protect, getMe, getUser);
 
 // These endpoints are for personal use, not integrated into the frontend
 router.patch("/updateMyPassword", protect, updatePassword);
