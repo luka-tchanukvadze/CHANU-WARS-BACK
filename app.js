@@ -57,7 +57,7 @@ app.use(hpp());
 // middleware for handling CORS POLICY
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://chanu-wars.vercel.app/",
+  "https://chanu-wars.vercel.app",
 ];
 
 app.use(
