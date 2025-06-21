@@ -8,4 +8,11 @@ import { createOne, getAll } from "./handlerFactory.js";
  */
 
 export const getAllReviews = getAll(Review);
-export const createNewReview = createOne(Review);
+export const createNewReview = catchAsync(async (req, res, next) => {
+  req.body.user = req.user.id;
+  const doc = await Review.create(req.body);
+  res.status(201).json({
+    status: "success",
+    data: { data: doc },
+  });
+});
