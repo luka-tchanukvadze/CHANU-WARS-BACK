@@ -80,6 +80,10 @@ app.get("/", (request, response) => {
   return response.status(234).send("welcome to my project");
 });
 
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.use("/randomInfos", randomInfoRoute);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
