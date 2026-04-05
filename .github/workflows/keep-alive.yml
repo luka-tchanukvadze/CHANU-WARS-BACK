@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping health endpoint
-        run: curl -fsS https://chanu-wars-back-niuc9xba8-lukatchanukvadzes-projects.vercel.app/api/health
+        run: curl -fsS https://chanu-wars-back.vercel.app/api/health
