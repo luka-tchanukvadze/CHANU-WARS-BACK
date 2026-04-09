@@ -59,8 +59,8 @@ export const login = catchAsync(async (req, res, next) => {
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select("+password");
 
-  if ((!user, !(await user.correctPassword(password, user.password)))) {
-    return next(new AppError("Incoddect email or password", 401));
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError("Incorrect email or password", 401));
   }
 
   // 3) If everything ok, send token to client
@@ -71,6 +71,8 @@ export const logout = catchAsync(async (req, res, next) => {
   res.cookie("jwt", "loggedout", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+    sameSite: "none",
   });
 
   res.status(200).json({ status: "success" });
@@ -123,9 +125,10 @@ export const restristTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You do not have perission to perform this action", 403)
+        new AppError("You do not have permission to perform this action", 403)
       );
     }
+    next();
   };
 };
 
