@@ -2,7 +2,7 @@ name: Keep MongoDB Atlas Alive
 
 on:
   schedule:
-    - cron: "0 8 */4 * *" # every 4 days at 08:00 UTC
+    - cron: "0 */12 * * *" # every 12 hours
   workflow_dispatch: # allow manual trigger
 
 jobs:
