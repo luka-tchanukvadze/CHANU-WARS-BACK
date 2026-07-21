@@ -10,4 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping health endpoint
-        run: curl -fsS https://chanu-wars-back.vercel.app/api/health
+        run: |
+          curl -fsS --retry 5 --retry-all-errors --retry-delay 20 --max-time 30 \
+            https://chanu-wars-back.vercel.app/api/health

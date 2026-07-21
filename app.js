@@ -2,6 +2,7 @@ import express from "express";
 import randomInfoRoute from "./routes/randomInfoRoute.js";
 import userRoutes from "./routes/userRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+import { RandomInfo } from "./models/RandomInfoModel.js";
 
 import cors from "cors";
 import AppError from "./utils/appError.js";
@@ -80,8 +81,15 @@ app.get("/", (request, response) => {
   return response.status(234).send("welcome to my project");
 });
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
+// Runs a real query on purpose: Atlas counts database operations as activity,
+// so a static { status: "ok" } would never stop the cluster pausing.
+app.get("/api/health", async (req, res) => {
+  try {
+    await RandomInfo.findOne().select("_id").lean().maxTimeMS(5000);
+    res.status(200).json({ status: "ok", db: "connected" });
+  } catch (err) {
+    res.status(503).json({ status: "error", db: "unreachable" });
+  }
 });
 
 app.use("/randomInfos", randomInfoRoute);

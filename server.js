@@ -13,9 +13,16 @@ process.on("uncaughtException", (err) => {
 
 const mongoDBURL = process.env.MONGO_URL;
 
-mongoose.connect(mongoDBURL).then(() => {
-  console.log("app connected to database");
-});
+// Must not reject unhandled: the handler below exits the process, which would
+// take down every route (including /api/health) whenever the DB is unreachable.
+mongoose
+  .connect(mongoDBURL)
+  .then(() => {
+    console.log("app connected to database");
+  })
+  .catch((err) => {
+    console.log("DB connection failed:", err.message);
+  });
 
 const port = process.env.PORT || 3001;
 
